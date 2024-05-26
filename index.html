@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To do list</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+
+    <div class="navbar-top">
+      <a href="#" class="logo">
+        <img class="mail" src="img/mail.svg" alt="картинка письма">
+      </a>
+      <div class="logo">
+        <p>logo</p>
+      </div>
+      <img class="sort-up" src="img/sort-up.png" alt="">
+      <img class="sort-down" src="img/sort-down.png" alt="">
+      <button class="creature">Создать задачу</button>
+      <a href="#" class="logo">
+        <img class="setting" src="img/setting.png" alt="картинка настроек">
+      </a>
+    </div>
+  </header>
+  <hr>
+  <section class="main">
+    <div class="container">
+      <div class="warning">
+        <p>
+          Ох,у вас ещё нет задачи, может создадим?
+        </p>
+        <button class="creature">Создать задачу</button>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="modal">
+    <div class="modal__overlay">
+
+    </div>
+    <!-- /.model_overlay -->
+
+    <div class="modal__dialog">
+      
+        <a class="modal__close" href="#">
+          <img class="modal__close" src="img/close.png" alt="icon : close ">
+        </a>
+
+        <h3 class="modal__name">Please enter a new name</h3>
+        <hr>
+        <div class="inp__container">
+        <form class="modal__form">
+          <legend class="input__legend">Title</legend>
+          <input type="text" class="input model__title" placeholder="title" name="title">
+          <legend class="input__legend">Description</legend>
+          <input type="text" class="model__description" placeholder="description" name="Description">
+
+          <select class="input__color">
+            <option value="">Select color</option>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+            <option value="gray">gray</option>
+          </select>
+          <fieldset>
+            <legend class="input__legend">level</legend>
+            <div>
+              <input type="radio" class="input__level" name="level" value="Low" checked />
+              <label>Low</label>
+            </div>
+
+            <div>
+              <input type="radio" class="input__level" name="level" value="Medium" />
+              <label >Medium</label>
+            </div>
+
+            <div>
+              <input type="radio" class="input__level" name="level" value="High" />
+              <label>High</label>
+            </div>
+          </fieldset>
+          <button class="btn ok">OK</button>
+          <button class="btn Cancel">Cancel</button>
+        </form>
+
+
+      </div>
+      <!-- /.inp__container -->
+    </div>
+    <!-- /.modal_dialog -->
+
+  </div>
+  <!-- /.modal -->
+</body>
+<script src="/js/main.js"></script>
+<script src="/js/modal.js"></script>
+</html>
