@@ -10,30 +10,31 @@
 
 <body>
   <header>
-
-    <div class="navbar-top">
-      <a href="#" class="logo">
-        <img class="mail" src="img/mail.svg" alt="картинка письма">
+    <div class="header__navbar">
+      <a href="#">
+        <img class="header__mail" src="img/mail.svg" alt="картинка письма">
       </a>
-      <div class="logo">
+      <div class="header__logo">
         <p>logo</p>
       </div>
-      <img class="sort-up" src="img/sort-up.png" alt="">
-      <img class="sort-down" src="img/sort-down.png" alt="">
-      <button class="creature">Создать задачу</button>
-      <a href="#" class="logo">
-        <img class="setting" src="img/setting.png" alt="картинка настроек">
+      <div class="header__sort">
+        <img class="header__sort-up" src="img/sort-up.png" alt="">
+        <img class="header__sort-down" src="img/sort-down.png" alt="">
+      </div>
+      <button class="header__creature">Создать задачу</button>
+      <a href="#">
+        <img class="header__setting" src="img/setting.png" alt="картинка настроек">
       </a>
     </div>
   </header>
   <hr>
   <section class="main">
-    <div class="container">
-      <div class="warning">
+    <div class="main__container">
+      <div class="main__warning">
         <p>
           Ох,у вас ещё нет задачи, может создадим?
         </p>
-        <button class="creature">Создать задачу</button>
+        <button class="main header__creature">Создать задачу</button>
       </div>
     </div>
 
@@ -41,45 +42,40 @@
 
   <div class="modal">
     <div class="modal__overlay">
-
+      
     </div>
     <!-- /.model_overlay -->
 
     <div class="modal__dialog">
-      
-        <a class="modal__close" href="#">
-          <img class="modal__close" src="img/close.png" alt="icon : close ">
-        </a>
 
-        <h3 class="modal__name">Please enter a new name</h3>
-        <hr>
-        <div class="inp__container">
+      <a class="modal__close" href="#">
+        <img class="modal__close" src="img/close.png" alt="icon : close ">
+      </a>
+
+      <h3 class="modal__name">Please enter a new name</h3>
+      <hr>
+      <div class="input__container">
         <form class="modal__form">
           <legend class="input__legend">Title</legend>
-          <input type="text" class="input model__title" placeholder="title" name="title">
+          <input type="text" class="input__title" placeholder="title" name="title">
           <legend class="input__legend">Description</legend>
-          <input type="text" class="model__description" placeholder="description" name="Description">
-
-          <select class="input__color">
-            <option value="">Select color</option>
-            <option value="red">red</option>
-            <option value="blue">blue</option>
-            <option value="gray">gray</option>
-          </select>
+          <input type="text" class="input__description" placeholder="description" name="Description">
+          <div class="input__selectColor">select color</div>
+          <input type="color" class="input__color">
           <fieldset>
-            <legend class="input__legend">level</legend>
+            <legend class="input__level">level</legend>
             <div>
               <input type="radio" class="input__level" name="level" value="Low" checked />
               <label>Low</label>
             </div>
-
+            
             <div>
-              <input type="radio" class="input__level" name="level" value="Medium" />
-              <label >Medium</label>
+              <input type="radio" class="input__level" name="level" value="Medium" checked />
+              <label>Medium</label>
             </div>
 
             <div>
-              <input type="radio" class="input__level" name="level" value="High" />
+              <input type="radio" class="input__level" name="level" value="High" checked  />
               <label>High</label>
             </div>
           </fieldset>
@@ -97,5 +93,5 @@
   <!-- /.modal -->
 </body>
 <script src="/js/main.js"></script>
-<script src="/js/modal.js"></script>
+
 </html>
