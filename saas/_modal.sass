@@ -7,7 +7,7 @@
     right: 0
     bottom: 0
     top: 0
-    background-color: rgba(0, 143, 223, 0.39)
+    background-color: rgba(6, 37, 54, 0.39)
     z-index: 100
     display: none
     transition: opacity 0.2s
@@ -43,35 +43,10 @@
     text-transform: uppercase
     font-size: 25px
     line-height: 18px
-
-.input
-  &__title
-    border-radius: 5px
-    padding: 0 20px
-    width: 885px
-    height: 30px
-  &__description
-    border-radius: 5px
-    padding: 0 20px
-    width: 885px
-    height: 50px
-    margin-bottom: 10px
-  &__selectColor
-    padding: 0
-    margin-bottom: 10px
-    color: inherit
-    text-decoration: none
-    text-transform: uppercase
-    font-size: 20px
-  &__color
-    height: 30px
-    width: 100px
-    border-radius: 10px
-    font-size: 15px
-    align-content: center
-    margin-bottom: 30px
-    cursor: pointer
-  &__legend
+  &__input-container
+    width: 930px
+    margin-left: 35px
+  &__input-legend
     color: inherit
     text-decoration: none
     text-transform: uppercase
@@ -79,12 +54,34 @@
     line-height: 18px
     margin-top: 25px
     margin-bottom: 3px
-  &__container
-    width: 930px
-    margin-left: 35px
+  &__input-title
+    border-radius: 5px
+    padding: 0 20px
+    width: 925px
+    height: 30px
+  &__input-description
+    border-radius: 5px
+    padding: 0 20px
+    width: 925px
+    height: 50px
+    margin-bottom: 5px
+  &__input-selectColor
+    padding: 0
+    color: inherit
+    text-decoration: none
+    text-transform: uppercase
+    font-size: 20px
+  &__input-color
+    height: 30px
+    width: 100px
+    border-radius: 10px
+    font-size: 15px
+    align-content: center
+    margin-bottom: 15px
+    cursor: pointer
 
 .btn
-  margin-top: 8px
+  margin-top: 10px
   width: 60px
   height: 30px
   background-color: transparent

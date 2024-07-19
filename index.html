@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To do list</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/normalize.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
       </div>
       <button class="header__creature">Создать задачу</button>
       <a href="#">
-        <img class="header__setting" src="img/setting.png" alt="картинка настроек">
+        <img class="header__setting" src="img/setting.png" alt="картинка настроек"> 
       </a>
     </div>
   </header>
@@ -54,36 +55,34 @@
 
       <h3 class="modal__name">Please enter a new name</h3>
       <hr>
-      <div class="input__container">
+      <div class="modal__input-container">
         <form class="modal__form">
-          <legend class="input__legend">Title</legend>
-          <input type="text" class="input__title" placeholder="title" name="title">
-          <legend class="input__legend">Description</legend>
-          <input type="text" class="input__description" placeholder="description" name="Description">
-          <div class="input__selectColor">select color</div>
-          <input type="color" class="input__color">
+          <legend class="modal__input-legend">Title</legend>
+          <input type="text" class="modal__input-title" placeholder="title" name="title">
+          <legend class="modal__input-legend">Description</legend>
+          <input type="text" class="modal__input-description" placeholder="description" name="Description">
+          <div class="modal__input-selectColor">select color</div>
+          <input type="color" class="modal__input-color">
           <fieldset>
-            <legend class="input__level">level</legend>
+            <legend class="modal__input-level">level</legend>
             <div>
-              <input type="radio" class="input__level" name="level" value="Low" checked />
+              <input type="radio" class="modal__input-level" name="level" value="Low" checked />
               <label>Low</label>
             </div>
             
             <div>
-              <input type="radio" class="input__level" name="level" value="Medium" checked />
+              <input type="radio" class="modal__input-level" name="level" value="Medium" checked />
               <label>Medium</label>
             </div>
 
             <div>
-              <input type="radio" class="input__level" name="level" value="High" checked  />
+              <input type="radio" class="modal__input-level" name="level" value="High" checked  />
               <label>High</label>
             </div>
           </fieldset>
-          <button class="btn ok">OK</button>
+          <button class="btn ok" >OK</button>
           <button class="btn Cancel">Cancel</button>
         </form>
-
-
       </div>
       <!-- /.inp__container -->
     </div>
@@ -93,5 +92,4 @@
   <!-- /.modal -->
 </body>
 <script src="/js/main.js"></script>
-
 </html>

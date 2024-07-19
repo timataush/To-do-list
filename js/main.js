@@ -1,62 +1,94 @@
 let modalBtn = document.querySelectorAll('.header__creature');
 let modalOverlay = document.querySelector('.modal__overlay');
 let modalDialog = document.querySelector('.modal__dialog');
- for(let creature of modalBtn ){
-creature.addEventListener('click', create);
-};
+let modalExit = document.querySelector('.modal__close');
+let save = document.querySelector('.btn.ok');
+let time = new Date();
 
-function create(){ 
+modalExit.addEventListener('click', modalClose);
+modalOverlay.addEventListener('click', overlayExit);
+save.addEventListener('click', createTask);
+
+let tasksData = JSON.parse(localStorage.getItem('data')) || [];
+
+
+ for(let creature of modalBtn ){
+creature.addEventListener('click', openModal);
+}
+
+function openModal(){ 
   modalOverlay.style.display = 'block';
   modalDialog.style.display = 'block';
  }
 
-let modalExit = document.querySelector('.modal__close');
-modalExit.addEventListener('click', closeExit);
-function closeExit(e){ 
+function modalClose(e){ 
   e.preventDefault();
-  modalOverlay.style.display = 'none';
-  modalDialog.style.display = 'none';
-};
+  reset()
+  clearF();
+}
 
-modalOverlay.addEventListener('click', backgroundExit);
- function backgroundExit(e){
+function overlayExit(e){
   if(e.target === modalOverlay){
-  modalOverlay.style.display = 'none';
-  modalDialog.style.display = 'none';
-  }
-};
+  reset()
+  
+  clearF()
+}}
 
-
-
-
-
-let save = document.querySelector('.btn.ok');
-
-save.addEventListener('click', exite);
-function exite(){
+function reset(){
   modalOverlay.style.display = 'none';
   modalDialog.style.display = 'none';
 }
+function clearF() {
+     document.querySelector('.modal__input-title').value = '';
+     document.querySelector('.modal__input-description').value = '';
+     document.querySelector('.modal__input-color').value = '';
+     document.querySelectorAll('.modal__input-level').value = '';
+    }   
 
-save.addEventListener('click', createTask);
+
+
+    function warning() {
+    let title = document.querySelector('.modal__input-title').value;
+    let description = document.querySelector('.modal__input-description').value;
+    
+    if (!title || !description ) {
+        alert("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!!!!");
+        return false;
+    }
+    return true;
+}
+
+
 function createTask(e) {
   e.preventDefault();
 
-  let title = document.querySelector('.input__title').value;
-  let description = document.querySelector('.input__description').value;
-  let color = document.querySelector('.input__color').value;
-  let level = document.querySelector('.input__level').value;
+  if (!warning()) {
+        return; 
+    }
+
+  let title = document.querySelector('.modal__input-title').value;
+  let description = document.querySelector('.modal__input-description').value;
+  let color = document.querySelector('.modal__input-color').value;
+  let levelElements = document.querySelectorAll('.modal__input-level');
+  let level;
+
+    for (let element of levelElements) {
+        if (element.checked) {
+            level = element.value;
+            break;
+        }
+    }
 
   let values = {
-    title: title,
-    description: description,
-    color: color,
-    level: level,
+    title,
+    description,
+    color,
+    level,
+    time
   };
-  let currentData = [];
-   currentData.push(values);
-
-localStorage.setItem('data', JSON.stringify(currentData));
-console.log(level)
-};
+tasksData.push(values);
+localStorage.setItem('data', JSON.stringify(tasksData));
+clearF();
+reset();
+}
 
