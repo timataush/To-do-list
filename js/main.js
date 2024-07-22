@@ -3,13 +3,13 @@ let modalOverlay = document.querySelector('.modal__overlay');
 let modalDialog = document.querySelector('.modal__dialog');
 let modalExit = document.querySelector('.modal__close');
 let save = document.querySelector('.btn.ok');
-let time = new Date();
+let cancel = document.querySelector('.btn.cancel');
 
 modalExit.addEventListener('click', modalClose);
 modalOverlay.addEventListener('click', overlayExit);
 save.addEventListener('click', createTask);
-
-let tasksData = JSON.parse(localStorage.getItem('data')) || [];
+cancel.addEventListener('click',modalClose );
+ let tasksData = JSON.parse(localStorage.getItem('data')) || [];
 
 
  for(let creature of modalBtn ){
@@ -23,39 +23,40 @@ function openModal(){
 
 function modalClose(e){ 
   e.preventDefault();
-  reset()
-  clearF();
+  reset();
 }
 
 function overlayExit(e){
   if(e.target === modalOverlay){
-  reset()
-  
-  clearF()
+  reset();
 }}
 
 function reset(){
   modalOverlay.style.display = 'none';
   modalDialog.style.display = 'none';
+
+  document.querySelector('.modal__input-title').value = '';
+  document.querySelector('.modal__input-description').value = '';
+  document.querySelector('.modal__input-color').value = '';
+  document.querySelectorAll('.modal__input-level').value = '';
+ document.querySelector('input[name="level"][value="Low"]').checked = true;
 }
-function clearF() {
-     document.querySelector('.modal__input-title').value = '';
-     document.querySelector('.modal__input-description').value = '';
-     document.querySelector('.modal__input-color').value = '';
-     document.querySelectorAll('.modal__input-level').value = '';
-    }   
-
-
-
     function warning() {
-    let title = document.querySelector('.modal__input-title').value;
-    let description = document.querySelector('.modal__input-description').value;
-    
-    if (!title || !description ) {
-        alert("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!!!!");
-        return false;
+    let title = document.querySelector('.modal__input-title') ;
+    let description = document.querySelector('.modal__input-description');
+    let valid = true;
+
+if (!title.value) {
+        title.classList.add('warning');
+        valid = false;
     }
-    return true;
+     else{title.classList.remove('warning');}
+    if (!description.value) {
+        description.classList.add('warning');
+        valid = false
+    }
+    else{description.classList.remove('warning');}
+    return valid;
 }
 
 
@@ -63,8 +64,7 @@ function createTask(e) {
   e.preventDefault();
 
   if (!warning()) {
-        return; 
-    }
+        return  }
 
   let title = document.querySelector('.modal__input-title').value;
   let description = document.querySelector('.modal__input-description').value;
@@ -84,11 +84,12 @@ function createTask(e) {
     description,
     color,
     level,
-    time
+    time: new Date().getTime()
   };
 tasksData.push(values);
 localStorage.setItem('data', JSON.stringify(tasksData));
-clearF();
+
 reset();
+
 }
 

@@ -98,6 +98,10 @@
   border-radius: 10px;
 }
 
+.warning {
+  border: 2px solid red;
+}
+
 .header {
   width: 100%;
   background-color: rgba(12, 198, 40, 0.39);
