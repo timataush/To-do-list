@@ -41,8 +41,8 @@ function reset(){
   document.querySelectorAll('.modal__input-level').value = '';
  document.querySelector('input[name="level"][value="Low"]').checked = true;
 }
-    function warning() {
-    let title = document.querySelector('.modal__input-title') ;
+    function warning(){
+    let title = document.querySelector('.modal__input-title');
     let description = document.querySelector('.modal__input-description');
     let valid = true;
 
@@ -59,11 +59,10 @@ if (!title.value) {
     return valid;
 }
 
-
-function createTask(e) {
+function createTask(e){
   e.preventDefault();
 
-  if (!warning()) {
+  if (!warning()){
         return  }
 
   let title = document.querySelector('.modal__input-title').value;
@@ -72,7 +71,7 @@ function createTask(e) {
   let levelElements = document.querySelectorAll('.modal__input-level');
   let level;
 
-    for (let element of levelElements) {
+    for (let element of levelElements){
         if (element.checked) {
             level = element.value;
             break;
@@ -88,8 +87,6 @@ function createTask(e) {
   };
 tasksData.push(values);
 localStorage.setItem('data', JSON.stringify(tasksData));
-
 reset();
-
 }
 
