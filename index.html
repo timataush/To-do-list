@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>To do list</title>
-		<link rel="stylesheet" href="/css/style.css" />
-		<link rel="stylesheet" href="/css/normalize.css" />
-	</head>
 
-	<body>
-		<header>
-			<div class="header__navbar">
-				<a href="#">
-					<img class="header__mail" src="img/mail.svg" alt="картинка письма" />
-				</a>
-				<div class="header__logo">
-					<p>logo</p>
-				</div>
-				<div class="header__sort">
-					<img class="header__sort-up" src="img/sort-up.png" alt="" />
-					<img class="header__sort-down" src="img/sort-down.png" alt="" />
-				</div>
-				<button class="header__creature">Создать задачу</button>
-				<a href="#">
-					<img
-						class="header__setting"
-						src="img/setting.png"
-						alt="картинка настроек"
-					/>
-				</a>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>To do list</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/normalize.css" />
+</head>
+
+<body>
+	<header>
+		<div class="header__navbar">
+			<a href="#">
+				<img class="header__mail" src="img/mail.svg" alt="картинка письма" />
+			</a>
+			<div class="header__logo">
+				<p>logo</p>
 			</div>
-		</header>
-		<hr />
-		<section class="main">
+			<div class="header__sort">
+				<img class="header__sort-up" src="img/sort-up.png" alt="" />
+				<img class="header__sort-down" src="img/sort-down.png" alt="" />
+			</div>
+			<button class="header__creature">Создать задачу</button>
+			<a href="#">
+				<img class="header__setting" src="img/setting.png" alt="картинка настроек" />
+			</a>
+		</div>
+	</header>
+	<hr class="hr" />
+	<section class="main">
 			<div class="main__container">
 				<div class="main__warning">
 					<p>Ох,у вас ещё нет задачи, может создадим?</p>
@@ -41,75 +38,80 @@
 			</div>
 		</section>
 
-		<div class="modal">
-			<div class="modal__overlay"></div>
-			<!-- /.model_overlay -->
 
-			<div class="modal__dialog">
-				<a class="modal__close" href="#">
-					<img class="modal__close" src="img/close.png" alt="icon : close " />
-				</a>
-
-				<h3 class="modal__name">Please enter a new name</h3>
-				<hr />
-				<div class="modal__input-container">
-					<form class="modal__form">
-						<legend class="modal__input-legend">Title</legend>
-						<input
-							type="text"
-							class="modal__input-title"
-							placeholder="title"
-							name="title"
-						/>
-						<legend class="modal__input-legend">Description</legend>
-						<input
-							type="text"
-							class="modal__input-description"
-							placeholder="description"
-							name="Description"
-						/>
-						<div class="modal__input-selectColor">select color</div>
-						<input type="color" class="modal__input-color" />
-						<fieldset>
-							<legend class="modal__input-level">level</legend>
-							<div>
-								<input
-									type="radio"
-									class="modal__input-level"
-									name="level"
-									value="Low"
-									checked
-								/>
-								<label>Low</label>
-							</div>
-							<div>
-								<input
-									type="radio"
-									class="modal__input-level"
-									name="level"
-									value="Medium"
-								/>
-								<label>Medium</label>
-							</div>
-							<div>
-								<input
-									type="radio"
-									class="modal__input-level"
-									name="level"
-									value="High"
-								/>
-								<label>High</label>
-							</div>
-						</fieldset>
-						<button type="button" class="btn ok">OK</button>
-						<button type="button" class="btn cancel">Cancel</button>
-					</form>
-				</div>
-				<!-- /.inp__container -->
-			</div>
-			<!-- /.modal_dialog -->
+	<!-- <div class="counter">
+		  <div class="counter__top">
+		  	 <div class="counter__quantity-text">Количество задач</div>
+			  <div class="counter__quantity-num">
+				  <div class="counter__quantity-num-complete"></div>&#47;
+					<div class="counter__quantity-num-all"></div>
+			  </div>
 		</div>
-		<!-- /.modal -->
-	</body>
-	<script src="/js/main.js"></script>
+		<div class="counter__bottom">Все задачи</div>
+	</div> -->
+
+	<!-- <div class="newTask">
+		<div class="newTask__container">
+			<div class="newTask__left">
+				<span class="newTask__left-title"> ${inputTitle} </span>
+				<span class="newTask__left-Description"> ${inputDescription} </span>
+				<span class="newTask__left-level"> ${levelElements} </span>
+			</div>
+			<div class="newTask__right">
+				<span class="newTask__right-time"> ${levelElements} </span>
+				<div class="newTask__right-btn">
+					<button class="newTask__btn-complete">complete</button>
+					<button class="newTask__btn-adit">adit</button>
+					<button class="newTask__btn-delete">delete</button>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<div class="modal">
+		<div class="modal__overlay"></div>
+		<!-- /.model_overlay -->
+
+		<div class="modal__dialog">
+			<a class="modal__close" href="#">
+				<img class="modal__close" src="img/close.png" alt="icon : close " />
+			</a>
+
+			<h3 class="modal__name">Please enter a new name</h3>
+			<hr />
+			<div class="modal__input-container">
+				<form class="modal__form">
+					<legend class="modal__input-legend">Title</legend>
+					<input type="text" class="modal__input-title" placeholder="title" name="title" />
+					<legend class="modal__input-legend">Description</legend>
+					<input type="text" class="modal__input-description" placeholder="description" name="Description" />
+					<div class="modal__input-selectColor">select color</div>
+					<input type="color" class="modal__input-color" />
+					<fieldset>
+						<legend class="modal__input-level">level</legend>
+						<div>
+							<input type="radio" class="modal__input-level" name="level" value="Low" checked />
+							<label>Low</label>
+						</div>
+						<div>
+							<input type="radio" class="modal__input-level" name="level" value="Medium" />
+							<label>Medium</label>
+						</div>
+						<div>
+							<input type="radio" class="modal__input-level" name="level" value="High" />
+							<label>High</label>
+						</div>
+					</fieldset>
+					<button type="button" class="btn ok">OK</button>
+					<button type="button" class="btn cancel">Cancel</button>
+				</form>
+			</div>
+			<!-- /.inp__container -->
+		</div>
+		<!-- /.modal_dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+<script src="/js/main.js"></script>
+
 </html>
