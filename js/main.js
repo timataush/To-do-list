@@ -23,49 +23,6 @@ inputDescription.addEventListener('input', inputChange)
 tasksData.forEach(element => {
 	addTask(element)
 })
-//  основной элемент
-// function addTask(data) {
-// 	let inputTitle = document.querySelector('.modal__input-title').value
-// 	let inputDescription = document.querySelector('.modal__input-description').value
-// 	let levelElements = document.querySelectorAll('.modal__input-level').value
-
-// 	let newTask = document.createElement('span')
-// 	newTask.innerHTML = ` <!-- <div class="counter">
-// 		  <div class="counter__top">
-// 		  	 <div class="counter__quantity-text">Количество задач</div>
-// 			  <div class="counter__quantity-num">
-// 				  <div class="counter__quantity-num-complete"></div>&#47;
-// 					<div class="counter__quantity-num-all"></div>
-// 			  </div>
-// 		</div>
-// 		<div class="counter__bottom">Все задачи</div>
-// 	</div>
-
-// 	<div class="newTask">
-// 		<div class="newTask__container">
-// 			<div class="newTask__left">
-// 				<span class="newTask__left-title"> ${inputTitle} </span>
-// 				<span class="newTask__left-Description"> ${inputDescription} </span>
-// 				<span class="newTask__left-level"> ${levelElements} </span>
-// 			</div>
-// 			<div class="newTask__right">
-// 				<span class="newTask__right-time"> ${levelElements} </span>
-// 				<div class="newTask__right-btn">
-// 					<button class="newTask__btn-complete">complete</button>
-// 					<button class="newTask__btn-adit">adit</button>
-// 					<button class="newTask__btn-delete">delete</button>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	</div> -->
-
-// `
-// 	// new Date().getTime()
-// 	let parent = document.querySelector('.main__warning')
-// 	// console.log(newTask)
-// 	parent.append(newTask)
-// }
-
 
 // ...................
 function addTask(data) {
@@ -98,16 +55,14 @@ function addTask(data) {
 
 	let hrElement = document.querySelector('.hr') // Находим элемент <header>
 	hrElement.insertAdjacentElement('afterend', newTask) // Вставляем новый элемент после <header>
-}
+
 // .........................
 // Обработчик для кнопки "delete"
     let deleteButton = document.querySelector('.newTask__btn-delete');
     deleteButton.addEventListener('click', deleteTask()) 
 		function deleteTask(){
-        removeTask(newTask, time);
+        removeTask(newTask);
     }
-
-
 function removeTask(taskElement, taskTime) {
     // Удаляем элемент из DOM
     taskElement.remove();
@@ -115,7 +70,7 @@ function removeTask(taskElement, taskTime) {
     // Обновляем данные в localStorage
     tasksData = tasksData.filter(task => task.time !== taskTime);
     localStorage.setItem('data', JSON.stringify(tasksData));
-}
+}}
 
 // ....................
 
@@ -126,6 +81,7 @@ function warningCreateClose() {
 }
 
 // // Создание счётчика
+function createCounter(){
 let btnComplete = document.querySelector('.newTask__btn-complete')
 let btnDelete = document.querySelector('.newTask__btn-delete')
 let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
@@ -150,7 +106,7 @@ btnDelete.addEventListener('click', () => {
 	}
 	counter--
 	counterValueComplete.innerHTML = counter
-})
+})}
 /////////////////////////////////
 let addCounter = document.querySelector('.counter')
 
@@ -215,37 +171,6 @@ function warning() {
 
 	return inputTitle.value && inputDescription.value
 }
-// основной элемент
-// function createTask(e) {
-// 	e.preventDefault()
-// 	let title = inputTitle.value
-// 	let description = inputDescription.value
-// 	let color = document.querySelector('.modal__input-color').value
-// 	let levelElements = document.querySelectorAll('.modal__input-level')
-// 	let level
-
-// 	for (let element of levelElements) {
-// 		if (element.checked) {
-// 			level = element.value
-// 			break
-// 		}
-// 	}
-
-// 	let values = {
-// 		title,
-// 		description,
-// 		color,
-// 		level,
-// 		time: new Date().getTime(),
-// 	}
-// 	tasksData.push(values)
-// 	localStorage.setItem('data', JSON.stringify(tasksData))
-
-// 	if (!warning()) return
-// 	reset()
-// 	warningCreateClose()
-// 	addTask()
-// }
 
 
 function createTask(e) {
@@ -279,6 +204,7 @@ function createTask(e) {
     addTask(newTaskData);
     reset();
     warningCreateClose();
+		createCounter()
 		checkCounter()
 }
 
