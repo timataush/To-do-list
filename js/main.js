@@ -15,6 +15,25 @@ cancel.addEventListener('click', modalClose)
 // localStorage
 let tasksData = JSON.parse(localStorage.getItem('data')) || []
 
+let warningCreate = document.querySelector('.main')
+let addCounter = document.querySelector('.counter')
+
+let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
+let counterValueAll = document.querySelector('.counter__quantity-num-all')
+
+
+init()
+function init(){
+if (tasksData.length) {
+	warningCreate.style.display = 'none'
+	addCounter.style.display = 'block'
+}
+let counter = 0
+let counterAll = 0
+counterValueComplete.innerHTML = counter
+counterValueAll.innerHTML = counter
+}
+
 inputTitle.addEventListener('input', inputChange)
 inputDescription.addEventListener('input', inputChange)
 
@@ -50,74 +69,64 @@ function addTask(data) {
         </div>
     `
 
-	let parent = document.querySelector('.main__warning')
-	parent.append(newTask)
+	let parent = document.querySelector('.counter')
+	parent.insertAdjacentElement('afterend', newTask)
 
-	let hrElement = document.querySelector('.hr') // Находим элемент <header>
-	hrElement.insertAdjacentElement('afterend', newTask) // Вставляем новый элемент после <header>
+	// let hrElement = document.querySelector('.hr')
+	// hrElement.insertAdjacentElement('afterend', newTask)
 
-// .........................
-// Обработчик для кнопки "delete"
-    let deleteButton = document.querySelector('.newTask__btn-delete');
-    deleteButton.addEventListener('click', deleteTask()) 
-		function deleteTask(){
-        removeTask(newTask);
-    }
-function removeTask(taskElement, taskTime) {
-    // Удаляем элемент из DOM
-    taskElement.remove();
+	// .........................
+	// Обработчик для кнопки "delete"
+	// let deleteButton = newTask.querySelector('.newTask__btn-delete')
+	// deleteButton.addEventListener('click', deleteTask())
+	// function deleteTask(){
+	//     removeTask(newTask, taskTime)
+	// }
+	// function removeTask(taskElement, taskTime) {
+	//     // Удаляем элемент из DOM
+	//     taskElement.remove();
 
-    // Обновляем данные в localStorage
-    tasksData = tasksData.filter(task => task.time !== taskTime);
-    localStorage.setItem('data', JSON.stringify(tasksData));
-}}
+	//     // Обновляем данные в localStorage
+	//     tasksData = tasksData.filter(task => task.time !== taskTime);
+	// localStorage.setItem('data', JSON.stringify(tasksData));
+}
 
 // ....................
 
 // важные функции
-let warningCreate = document.querySelector('.main')
-function warningCreateClose() {
-	warningCreate.style.display = 'none'
-}
+// function warningCreateClose() {
+// 	warningCreate.style.display = 'none'
+// }
 
 // // Создание счётчика
 function createCounter(){
-let btnComplete = document.querySelector('.newTask__btn-complete')
-let btnDelete = document.querySelector('.newTask__btn-delete')
-let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
-let counterValueAll = document.querySelector('.counter__quantity-num-all')
+	let btnComplete = document.querySelector('.newTask__btn-complete')
+	let btnDelete = document.querySelector('.newTask__btn-delete')
+	// let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
+	let counterValueAll = document.querySelector('.counter__quantity-num-all')
 let counter = 0
 let counterAll = 0
-counterValueComplete.innerHTML = counter
-counterValueAll.innerHTML = counter
 
-save.addEventListener('click', () => {
-	counterAll++
-	counterValueAll.innerHTML = counterAll
-})
-btnComplete.addEventListener('click',() => {
-	counter++
-	counterValueComplete.innerHTML = counter
-})
+	save.addEventListener('click', () => {
+		counterAll++
+		counterValueAll.innerHTML = counterAll
+	})
+	btnComplete.addEventListener('click', () => {
+		counter++
+		counterValueComplete.innerHTML = counter
+	})
 
-btnDelete.addEventListener('click', () => {
-	if (counter <= 0) {
-		counter = 1
-	}
-	counter--
-	counterValueComplete.innerHTML = counter
-})}
-/////////////////////////////////
-let addCounter = document.querySelector('.counter')
+	btnDelete.addEventListener('click', () => {
+		if (counter <= 0) {
+			counter = 1
+		}
+		counter--
+		counterValueComplete.innerHTML = counter
+	})
+	let hrElement = document.querySelector('.hr')
+	hrElement.insertAdjacentElement('afterend', createCounter)
+}
 
-function checkCounter(){
-if(counterAll <= 0){
-	addCounter.style.display = 'none'
-}
-else{
-	addCounter.style.display = 'block'
-}
-}
 
 function inputChange() {
 	toggleWarning()
@@ -174,37 +183,36 @@ function warning() {
 
 
 function createTask(e) {
-    e.preventDefault();
+	e.preventDefault()
 
-    if (!warning()) return;
+	if (!warning()) return
 
-    let title = inputTitle.value;
-    let description = inputDescription.value;
-    let color = document.querySelector('.modal__input-color').value;
-    let levelElements = document.querySelectorAll('.modal__input-level');
-    let level = '';
+	let title = inputTitle.value
+	let description = inputDescription.value
+	let color = document.querySelector('.modal__input-color').value
+	let levelElements = document.querySelectorAll('.modal__input-level')
+	let level = ''
 
-    levelElements.forEach(element => {
-        if (element.checked) {
-            level = element.value;
-        }
-    });
+	levelElements.forEach(element => {
+		if (element.checked) {
+			level = element.value
+		}
+	})
 
-    let newTaskData = {
-        title,
-        description,
-        color,
-        level,
-        time: new Date().getTime(),
-    };
+	let newTaskData = {
+		title,
+		description,
+		color,
+		level,
+		time: new Date().getTime(),
+	}
 
-    tasksData.push(newTaskData);
-    localStorage.setItem('data', JSON.stringify(tasksData));
+	tasksData.push(newTaskData)
+	localStorage.setItem('data', JSON.stringify(tasksData))
 
-    addTask(newTaskData);
-    reset();
-    warningCreateClose();
-		createCounter()
-		checkCounter()
+	addTask(newTaskData)
+	reset()
+  init()
+
+	createCounter()
 }
-
