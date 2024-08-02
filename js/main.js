@@ -1,4 +1,4 @@
-// важные объявления переменных
+// Важные объявления переменных
 let modalBtn = document.querySelectorAll('.header__creature')
 let modalOverlay = document.querySelector('.modal__overlay')
 let modalDialog = document.querySelector('.modal__dialog')
@@ -7,45 +7,50 @@ let save = document.querySelector('.btn.ok')
 let cancel = document.querySelector('.btn.cancel')
 let inputTitle = document.querySelector('.modal__input-title')
 let inputDescription = document.querySelector('.modal__input-description')
-// объявления функций
+let warningCreate = document.querySelector('.main')
+let addCounter = document.querySelector('.counter')
+let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
+let counterValueAll = document.querySelector('.counter__quantity-num-all')
+
+// Обработчики событий
 modalExit.addEventListener('click', modalClose)
 modalOverlay.addEventListener('click', overlayExit)
 save.addEventListener('click', createTask)
 cancel.addEventListener('click', modalClose)
-// localStorage
-let tasksData = JSON.parse(localStorage.getItem('data')) || []
-
-let warningCreate = document.querySelector('.main')
-let addCounter = document.querySelector('.counter')
-
-let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
-let counterValueAll = document.querySelector('.counter__quantity-num-all')
 
 
-init()
-function init(){
-if (tasksData.length) {
-	warningCreate.style.display = 'none'
-	addCounter.style.display = 'block'
-}
+
+
+
+// Счетчики задач
 let counter = 0
 let counterAll = 0
-counterValueComplete.innerHTML = counter
-counterValueAll.innerHTML = counter
+
+// LocalStorage
+let tasksData = JSON.parse(localStorage.getItem('data')) || []
+
+init()
+function init() {
+	if (tasksData.length) {
+		warningCreate.style.display = 'none'
+		addCounter.style.display = 'block'
+	}
+	counter = 0
+	counterAll = tasksData.length
+	counterValueComplete.innerHTML = counter
+	counterValueAll.innerHTML = counterAll
+
+	// Создание задач из LocalStorage
+	tasksData.forEach(element => {
+		addTask(element)
+	})
 }
 
 inputTitle.addEventListener('input', inputChange)
 inputDescription.addEventListener('input', inputChange)
 
-
- //создание задач
-tasksData.forEach(element => {
-	addTask(element)
-})
-
-// ...................
 function addTask(data) {
-	let { title, description, color, level } = data // Получаем данные из объекта
+	let { title, description, color, level, time } = data
 
 	let newTask = document.createElement('div')
 	newTask.className = 'newTask'
@@ -58,12 +63,12 @@ function addTask(data) {
             </div>
             <div class="newTask__right">
                 <span class="newTask__right-time">${new Date(
-									data.time
+									time
 								).toLocaleString()}</span>
                 <div class="newTask__right-btn">
-                    <button class="newTask__btn-complete">complete</button>
-                    <button class="newTask__btn-adit">edit</button>
-                    <button class="newTask__btn-delete">delete</button>
+                    <button data-action="complete" class="newTask__btn-complete">complete</button>
+                    <button data-action="edit" class="newTask__btn-edit">edit</button>
+                    <button data-action="delete" class="newTask__btn-delete">delete</button>
                 </div>
             </div>
         </div>
@@ -72,61 +77,78 @@ function addTask(data) {
 	let parent = document.querySelector('.counter')
 	parent.insertAdjacentElement('afterend', newTask)
 
-	// let hrElement = document.querySelector('.hr')
-	// hrElement.insertAdjacentElement('afterend', newTask)
+	let newTaskContainer = document.querySelector('.newTask__container')
+	newTaskContainer.style.borderColor = color
 
-	// .........................
-	// Обработчик для кнопки "delete"
-	// let deleteButton = newTask.querySelector('.newTask__btn-delete')
-	// deleteButton.addEventListener('click', deleteTask())
-	// function deleteTask(){
-	//     removeTask(newTask, taskTime)
-	// }
-	// function removeTask(taskElement, taskTime) {
-	//     // Удаляем элемент из DOM
-	//     taskElement.remove();
-
-	//     // Обновляем данные в localStorage
-	//     tasksData = tasksData.filter(task => task.time !== taskTime);
-	// localStorage.setItem('data', JSON.stringify(tasksData));
-}
-
-// ....................
-
-// важные функции
-// function warningCreateClose() {
-// 	warningCreate.style.display = 'none'
-// }
-
-// // Создание счётчика
-function createCounter(){
-	let btnComplete = document.querySelector('.newTask__btn-complete')
-	let btnDelete = document.querySelector('.newTask__btn-delete')
-	// let counterValueComplete = document.querySelector('.counter__quantity-num-complete')
-	let counterValueAll = document.querySelector('.counter__quantity-num-all')
-let counter = 0
-let counterAll = 0
-
-	save.addEventListener('click', () => {
-		counterAll++
-		counterValueAll.innerHTML = counterAll
+	// Обработчик "delete"
+	let deleteButton = newTask.querySelector('.newTask__btn-delete')
+	deleteButton.addEventListener('click', () => {
+		removeTask(newTask, time)
+		if (tasksData.length <= 0) {
+			warningCreate.style.display = 'block'
+		}
 	})
-	btnComplete.addEventListener('click', () => {
+
+	// обработчик "edit"
+	
+	// let editButton = document.querySelector('.newTask__btn-edit') 
+  // editButton.addEventListener('click', () => {
+	// 	editTask(index, time)
+	// })
+	
+
+	// Обработчик "complete"
+	let completeButton = newTask.querySelector('.newTask__btn-complete')
+	completeButton.addEventListener('click', () => {
+		let menuComplete = document.querySelector('.menuComplete')
+		menuComplete.style.display = 'block'
+
 		counter++
 		counterValueComplete.innerHTML = counter
 	})
-
-	btnDelete.addEventListener('click', () => {
-		if (counter <= 0) {
-			counter = 1
-		}
-		counter--
-		counterValueComplete.innerHTML = counter
-	})
-	let hrElement = document.querySelector('.hr')
-	hrElement.insertAdjacentElement('afterend', createCounter)
 }
 
+// исправляю чужой код
+// function editTask(index, time) {
+// 	if (!curTask.classList.contains('edit')) {
+// 		// При первом нажатии на кнопку редактирования, начинаем редактировать.
+// 		curTask.classList.add('edit') // Добавляем класс
+// 		curTask.querySelector(
+// 			'.task'
+// 		).innerHTML = `<input type="test" value="${tasks[index].task}">` // Вместо задачи добавляем инпут с редактированием
+// 	} else {
+// 		// При втором нажатии, когда класс `.edit` есть, мы сохраним
+// 		let newTask = curTask.querySelector('.task > input').value
+// 		tasks[index].task = newTask
+// 		curTask.querySelector('.task').innerText = newTask
+// 		curTask.classList.remove('edit')
+// 		// storage();
+// 	}
+// }
+
+function removeTask(taskElement, taskTime) {
+	// Удаляем элемент из DOM
+	taskElement.remove()
+
+	// Обновляем данные в localStorage
+	tasksData = tasksData.filter(task => task.time !== taskTime)
+	localStorage.setItem('data', JSON.stringify(tasksData))
+
+	// Обновляем счетчик задач
+	counterAll--
+	counterValueAll.innerHTML = counterAll
+
+	// Проверка необходимости отображения счетчика задач
+	checkCounter()
+}
+
+function checkCounter() {
+	if (counterAll <= 0) {
+		addCounter.style.display = 'none'
+	} else {
+		addCounter.style.display = 'block'
+	}
+}
 
 function inputChange() {
 	toggleWarning()
@@ -165,7 +187,6 @@ function reset() {
 
 	inputTitle.value = ''
 	inputDescription.value = ''
-	// document.querySelector('.modal__input-color').value = ''
 	document.querySelectorAll('.modal__input-level').value = ''
 	document.querySelector('input[name="level"][value="Low"]').checked = true
 }
@@ -180,12 +201,17 @@ function warning() {
 
 	return inputTitle.value && inputDescription.value
 }
-
+// на всякий случай
+if (tasksData.length) {
+	warningCreate.style.display = 'none'
+}
 
 function createTask(e) {
 	e.preventDefault()
 
 	if (!warning()) return
+
+	warningCreate.style.display = 'none'
 
 	let title = inputTitle.value
 	let description = inputDescription.value
@@ -212,7 +238,10 @@ function createTask(e) {
 
 	addTask(newTaskData)
 	reset()
-  init()
 
-	createCounter()
+	// Обновляем счётчик задач
+	counterAll++
+	counterValueAll.innerHTML = counterAll
+	checkCounter()
 }
+
