@@ -13,12 +13,12 @@
 	<header>
 		<div class="header__navbar">
 			<a href="#">
-				<img class="header__mail" src="img/mail.svg" alt="картинка письма" />
+				<img class="header__mail" src="img/mail.svg" alt="картин	ка письма" />
 			</a>
 			<div class="header__logo">
 				<p>logo</p>
 			</div>
-			<div class="header__sort">
+			<div class="header__sort">		
 				<img class="header__sort-up" src="img/sort-up.png" alt="" />
 				<img class="header__sort-down" src="img/sort-down.png" alt="" />
 			</div>
@@ -28,33 +28,38 @@
 			</a>
 		</div>
 	</header>
-	<hr class="hr" />
-	<section class="main">
-			<div class="main__container">
-				<div class="main__warning">
-					<p>Ох,у вас ещё нет задачи, может создадим?</p>
-					<button class="main header__creature">Создать задачу</button>
-				</div>
-			</div>
-		</section>
 
 
-	<div class="counter">
-		  <div class="counter__top">
-		  	 <div class="counter__quantity-text">Количество задач</div>
-			  <div class="counter__quantity-num">
-				  <div class="counter__quantity-num-complete"></div>&#47;
-					<div class="counter__quantity-num-all"></div>
-			  </div>
-		</div>
-		<div class="counter__bottom">Все задачи</div>
-	</div>
 
-<div class="menuComplete">
-		<div class="menuComplete__container">
-	 		Выполненные задачи
-	 	</div>
-</div>
+	<hr class="hr">
+
+<section class="main">
+  <!-- <div class="main__container"> -->
+    <div class="main__warning">
+      <p class="main__warning-text">Ох, у вас ещё нет задачи, может создадим?</p>
+      <button class="main__create-btn header__creature">Создать задачу</button>
+  </div>
+<!-- </div> -->
+
+  
+
+  <div class="counter">	
+    <div class="counter__top">
+      <span class="counter__quantity-text">Количество задач</span>
+      <div class="counter__quantity-num">
+        <div class="counter__quantity-num-complete"></div>&#47;
+        <div class="counter__quantity-num-all"></div>
+      </div>
+    </div>
+    <span class="counter__bottom">Все задачи</span>
+  </div>
+
+  <div class="menu-complete">
+    <span class="menu-complete__text">Выполненные задачи</span>
+  </div>
+</section>
+
+
 
 	<div class="modal">
 		<div class="modal__overlay"></div>
