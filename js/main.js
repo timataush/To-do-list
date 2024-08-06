@@ -107,20 +107,25 @@ function toggleCompleteTask(taskTime) {
 
 	let task = tasksData.find(task => task.time === taskTime)
 
+		
+		
 	if (task) {
 		task.isDone = true
-
 		let containerComplete = document.createElement('div')
 		containerComplete.className = 'newTask'
 		containerComplete.innerHTML = `
 	        <div class="newTask__container">
 	            <div class="newTask__left">
 	                <span class="newTask__left-title">${task.title}</span>
-	                <span class="newTask__left-description">${task.description}</span>
+	                <span class="newTask__left-description">${
+										task.description
+									}</span>
 	                <span class="newTask__left-level">${task.level}</span>
 	            </div>
 	            <div class="newTask__right">
-	                <span class="newTask__right-time">${new Date(task.time).toLocaleString()}</span>
+	                <span class="newTask__right-time">${new Date(
+										task.time
+									).toLocaleString()}</span>
 	                <div class="newTask__right-btn">
 	                    <button data-action="edit" class="newTask__btn-edit">edit</button>
 	                    <button data-action="delete" class="newTask__btn-delete">delete</button>
@@ -131,21 +136,27 @@ function toggleCompleteTask(taskTime) {
 		let parent = document.querySelector('.menu-complete')
 		parent.append(containerComplete)
 
-		// Удаляем задачу
 		tasksData = tasksData.filter(task => task.time !== taskTime)
 		localStorage.setItem('data', JSON.stringify(tasksData))
+		// task.remove()
+		// removeTask(task, taskTime)
 
 		counter++
 		counterValue.innerHTML = `${counter}/${counterAll}`
 
 		// Добавляем обработчики для кнопок выполненной задачи
-		containerComplete.querySelector('.newTask__btn-delete').addEventListener('click', () => {
-			removeTask(containerComplete, task.time)
-		})
-		containerComplete.querySelector('.newTask__btn-edit').addEventListener('click', () => {
-			editTask(task)
-		})
+		containerComplete
+			.querySelector('.newTask__btn-delete')
+			.addEventListener('click', () => {
+				removeTask(containerComplete, task.time)
+			})
+		containerComplete
+			.querySelector('.newTask__btn-edit')
+			.addEventListener('click', () => {
+				editTask(task)
+			})
 	}
+	
 }
 
 function editTask(taskData) {
